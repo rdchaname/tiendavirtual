@@ -33,6 +33,7 @@
                 <h5 class="login-box-msg">Ingresa tus datos para iniciar sesión</h5>
                 <form action="{{ route('login') }}" method="post" autocomplete="off">
                     @csrf
+                    {{-- El siguiente IF es para colocar un mensaje luego de que se ha cambiado la contraseña --}}
                     @if (session('status'))
                     <div class="row">
                         <div class="col-12">
@@ -40,12 +41,17 @@
                                 {{ session('status') }}
                             </div>
                         </div>
-                    </div>0
+                    </div>
                     @endif
                     <div class="row">
                         <div class="col-12">
                             <div class="input-group mb-3">
-                                <input type="email" name="email" class="form-control" placeholder="Correo electrónico">
+                                <input type="email" value="{{ old('email') }}" name="email"
+                                    class="form-control @error('email') is-invalid @enderror"
+                                    placeholder="Correo electrónico">
+                                @error('email')
+                                <span class="invalid-feedback order-last">{{ $message }}</span>
+                                @enderror
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-envelope"></span>
@@ -57,7 +63,12 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="input-group mb-3">
-                                <input type="password" name="password" class="form-control" placeholder="Contraseña">
+                                <input type="password" name="password"
+                                    class="form-control @error('password') is-invalid @enderror"
+                                    placeholder="Contraseña">
+                                @error('password')
+                                <span class="invalid-feedback order-last">{{ $message }}</span>
+                                @enderror
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-lock"></span>
@@ -66,7 +77,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row mb-3">
                         <div class="col-12 col-sm-7">
                             <div class="icheck-primary">

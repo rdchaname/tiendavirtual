@@ -5,15 +5,15 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Home</a>
+            <a href="{{ route('admin.inicio') }}" class="nav-link">Inicio</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
+            <a href="{{ route('inicio') }}" class="nav-link">Ir a la tienda</a>
         </li>
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    {{-- <form class="form-inline ml-3">
         <div class="input-group input-group-sm">
             <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
             <div class="input-group-append">
@@ -22,7 +22,7 @@
                 </button>
             </div>
         </div>
-    </form>
+    </form> --}}
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -36,7 +36,7 @@
                 <a href="#" class="dropdown-item">
                     <!-- Message Start -->
                     <div class="media">
-                        <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                        <img src="{{ asset('dist/img/user1-128x128.jpg') }}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 Brad Diesel
@@ -52,7 +52,7 @@
                 <a href="#" class="dropdown-item">
                     <!-- Message Start -->
                     <div class="media">
-                        <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                        <img src="{{ asset('dist/img/user8-128x128.jpg') }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 John Pierce
@@ -68,7 +68,7 @@
                 <a href="#" class="dropdown-item">
                     <!-- Message Start -->
                     <div class="media">
-                        <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                        <img src="{{ asset('dist/img/user3-128x128.jpg') }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 Nora Silvester
@@ -110,6 +110,15 @@
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
+        </li>
+        <li class="nav-item dropdown">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button title="Cerrar sesión" type="submit" class="nav-link btn btn-link">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </form>
+            
         </li>
         <li class="nav-item">
             <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i

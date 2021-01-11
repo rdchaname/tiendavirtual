@@ -29,25 +29,35 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // para personalizar la vista al ingresar a /register
+        // Vista para registro de usuarios
         Fortify::registerView(function () {
+            // enviamos datos adicionales a la vista de registro
             $tipos_documentos = TipoDocumento::all();
             return view('auth.register', [
                 'combo_tipo_documentos' => $tipos_documentos
-            ]); // resources/views/auth/register.blade.php
+            ]);
         });
 
-        // para personalizar la vista al ingresar a /login
+        // Vista para inicio de sesión
         Fortify::loginView(function () {
             return view('auth.login');
         });
 
+        // Vista para Solicitar enlace para resetear contraseña
         Fortify::requestPasswordResetLinkView(function () {
-            return view('auth.forgot-password');
+            return view('auth.passwords.email');
         });
 
-        Fortify::resetPasswordView(function () {
-            return view('auth.reset');
+        // Vista para indicar la contraseña nueva, se mostrará cuando de clic en 
+        // el enlace que se envíe al usuario
+        Fortify::resetPasswordView(function ($request) {
+            return view('auth.passwords.reset', ['request' => $request]);
+        });
+
+        // Vista para mostrar cuando el usuario que ha iniciado sesión aún no ha verificado
+        // su correo electrónico
+        Fortify::verifyEmailView(function () {
+            return view('auth.email.verify-email');
         });
 
         Fortify::createUsersUsing(CreateNewUser::class);

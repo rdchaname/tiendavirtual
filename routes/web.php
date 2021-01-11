@@ -19,8 +19,5 @@ Route::get('/', function () {
 })->name('inicio');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index']);
-    Route::get('/admin2', [App\Http\Controllers\AdminController::class, 'index']);
-    Route::get('/admin3', [App\Http\Controllers\AdminController::class, 'index']);
-    Route::get('/admin4', [App\Http\Controllers\AdminController::class, 'index']);
+    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->middleware('verified')->name('admin.inicio');
 });

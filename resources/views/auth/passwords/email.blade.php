@@ -46,7 +46,12 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="input-group mb-3">
-                                <input type="email" class="form-control" name="email" placeholder="Correo electrónico">
+                                <input type="email" value="{{ old('email') }}" name="email"
+                                    class="form-control @error('email') is-invalid @enderror"
+                                    placeholder="Correo electrónico">
+                                @error('email')
+                                <span class="invalid-feedback order-last">{{ $message }}</span>
+                                @enderror
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-envelope"></span>

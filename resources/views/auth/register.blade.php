@@ -31,146 +31,163 @@
         <div class="card">
             <div class="card-body register-card-body">
                 <form action="{{ route('register') }}" method="post" autocomplete="off">
-                    @csrf                   
+                    @csrf
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="input-group mb-3">
-                                <input required name="apellido_paterno" type="text"
-                                    value="{{ old('apellido_paterno') }}" class="form-control"
+                                <input required name="apellido_paterno" id="apellido_paterno" type="text"
+                                    value="{{ old('apellido_paterno') }}"
+                                    class="form-control @error('apellido_paterno') is-invalid @enderror"
                                     placeholder="Apellido paterno">
+                                @error('apellido_paterno')
+                                <span class="invalid-feedback order-last ">{{ $message }}</span>
+                                @enderror
                                 <div class="input-group-append">
                                     <div class="input-group-text">
-                                        <span class="fas fa-user"></span>
+                                        <i class="fas fa-user"></i>
                                     </div>
                                 </div>
                             </div>
-                            @error('apellido_paterno')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="input-group mb-3">
                                 <input required name="apellido_materno" type="text"
-                                    value="{{ old('apellido_materno') }}" class="form-control"
+                                    value="{{ old('apellido_materno') }}"
+                                    class="form-control @error('apellido_materno') is-invalid @enderror"
                                     placeholder="Apellido materno">
+                                @error('apellido_materno')
+                                <span class="invalid-feedback order-last ">{{ $message }}</span>
+                                @enderror
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-user"></span>
                                     </div>
                                 </div>
                             </div>
-                            @error('apellido_materno')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="input-group mb-3">
                                 <input required name="nombres" type="text" value="{{ old('nombres') }}"
-                                    class="form-control" placeholder="Nombres">
+                                    class="form-control @error('nombres') is-invalid @enderror" placeholder="Nombres">
+                                @error('nombres')
+                                <span class="invalid-feedback order-last">{{ $message }}</span>
+                                @enderror
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-user"></span>
                                     </div>
                                 </div>
                             </div>
-                            @error('nombres')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="col-sm-6">
-                            <select class="form-control mb-3" name="tipo_documento_id" id="tipo_documento_id">
-                                @foreach($combo_tipo_documentos as $tipo)
-                                <option value="{{ $tipo->id }}">{{ $tipo->nombre_corto }}</option>
-                                @endforeach
-                            </select>
-                            @error('tipo_documento_id')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-sm-6">
+                        </div>
+                        <div class="col-sm-12 mb-3">
                             <div class="input-group mb-3">
-                                <input required name="documento" type="text" value="{{ old('documento') }}"
-                                    class="form-control" placeholder="Documento">
+                                <select class="form-control @error('tipo_documento_id') is-invalid @enderror"
+                                    name="tipo_documento_id" id="tipo_documento_id">
+                                    @foreach($combo_tipo_documentos as $tipo)
+                                    <option @if($tipo->id === (int)old('tipo_documento_id')) selected @endif
+                                        value="{{ $tipo->id }}">{{ $tipo->nombre_corto }}</option>
+                                    @endforeach
+                                </select>
+                                @error('tipo_documento_id')
+                                <span class="invalid-feedback order-last">{{ $message }}</span>
+                                @enderror
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <i class="fas fa-address-card"></i>
                                     </div>
                                 </div>
                             </div>
-                            @error('documento')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
                         </div>
-                        <div class="col-sm-6">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="input-group mb-3">
+                                <input required name="documento" type="text" value="{{ old('documento') }}"
+                                    class="form-control @error('documento') is-invalid @enderror"
+                                    placeholder="Documento">
+                                @error('documento')
+                                <span class="invalid-feedback order-last">{{ $message }}</span>
+                                @enderror
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-address-card"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-12">
                             <div class="input-group mb-3">
                                 <input required name="celular" type="text" value="{{ old('celular') }}"
-                                    class="form-control" placeholder="Celular">
+                                    class="form-control @error('celular') is-invalid @enderror" placeholder="Celular">
+                                @error('celular')
+                                <span class="invalid-feedback order-last">{{ $message }}</span>
+                                @enderror
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <i class="fas fa-phone"></i>
                                     </div>
                                 </div>
                             </div>
-                            @error('celular')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
+
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="input-group mb-3">
                                 <input required name="direccion" type="text" value="{{ old('direccion') }}"
-                                    class="form-control" placeholder="Dirección">
+                                    class="form-control @error('direccion') is-invalid @enderror"
+                                    placeholder="Dirección">
+                                @error('direccion')
+                                <span class="invalid-feedback order-last">{{ $message }}</span>
+                                @enderror
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <i class="fas fa-map-marker-alt"></i>
                                     </div>
                                 </div>
                             </div>
-                            @error('direccion')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="input-group mb-3">
                                 <input required name="email" type="email" value="{{ old('email') }}"
-                                    class="form-control" placeholder="Email">
+                                    class="form-control @error('email') is-invalid @enderror" placeholder="Email">
+                                @error('email')
+                                <span class="invalid-feedback order-last">{{ $message }}</span>
+                                @enderror
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-envelope"></span>
                                     </div>
                                 </div>
                             </div>
-                            @error('email')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
                         </div>
                     </div>
-
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="input-group mb-3">
-                                <input required name="password" type="password" class="form-control"
+                                <input required name="password" type="password"
+                                    class="form-control @error('password') is-invalid @enderror"
                                     placeholder="Contraseña">
+                                @error('password')
+                                <span class="invalid-feedback order-last">{{ $message }}</span>
+                                @enderror
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-lock"></span>
                                     </div>
                                 </div>
                             </div>
-                            @error('password')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
+
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="input-group mb-3">
-                                <input required name="password_confirmation" type="password" class="form-control"
+                                <input required name="password_confirmation" type="password"
+                                    class="form-control @error('password') is-invalid @enderror"
                                     placeholder="Confirmar contraseña">
                                 <div class="input-group-append">
                                     <div class="input-group-text">

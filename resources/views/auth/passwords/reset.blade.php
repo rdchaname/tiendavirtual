@@ -35,11 +35,16 @@
 
                 <form action="{{ route('password.update') }}" method="post" autocomplete="off">
                     @csrf
-                    <input type="hidden" name="token" value="{{ request()->route('token') }}">
+                    <input type="hidden" name="token" value="{{ $request->route('token') }}">
                     <div class="row">
                         <div class="col-12">
                             <div class="input-group mb-3">
-                                <input type="email" name="email" class="form-control" value="{{ $email ?? old('email') }}" placeholder="Correo electrónico">
+                                <input type="email" name="email"
+                                    class="form-control @error('email') is-invalid @enderror"
+                                    value="{{ old('email', $request->email) }}" placeholder="Correo electrónico">
+                                @error('email')
+                                <span class="invalid-feedback order-last">{{ $message }}</span>
+                                @enderror
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-envelope"></span>
@@ -48,23 +53,38 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control" placeholder="Contraseña">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-group mb-3">
+                                <input type="password" name="password"
+                                    class="form-control @error('password') is-invalid @enderror"
+                                    placeholder="Contraseña">
+                                @error('password')
+                                <span class="invalid-feedback order-last">{{ $message }}</span>
+                                @enderror
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="password" name="password_confirmation" class="form-control"
-                            placeholder="Confirmar contraseña">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-group mb-3">
+                                <input type="password" name="password_confirmation"
+                                    class="form-control @error('password') is-invalid @enderror"
+                                    placeholder="Confirmar contraseña">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="row mb-3">
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary btn-block">Cambiar contraseña</button>
