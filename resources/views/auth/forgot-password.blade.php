@@ -4,10 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Iniciar sesión</title>
+    <title>Recuperar Contraseña</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
@@ -25,13 +24,15 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ route('inicio') }}"><b>Tienda</b>Virtual</a>
+            <a href="{{ route('inicio') }}"><b>Admin</b>LTE</a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <h5 class="login-box-msg">Ingresa tus datos para iniciar sesión</h5>
-                <form action="{{ route('login') }}" method="post" autocomplete="off">
+                <p class="login-box-msg">¿Olvidaste tu contraseña? Aquí puede recuperar fácilmente una nueva contraseña.
+                </p>
+
+                <form action="{{ route('password.email') }}" method="post" autocomplete="off">
                     @csrf
                     @if (session('status'))
                     <div class="row">
@@ -40,12 +41,12 @@
                                 {{ session('status') }}
                             </div>
                         </div>
-                    </div>0
+                    </div>
                     @endif
                     <div class="row">
                         <div class="col-12">
                             <div class="input-group mb-3">
-                                <input type="email" name="email" class="form-control" placeholder="Correo electrónico">
+                                <input type="email" class="form-control" name="email" placeholder="Correo electrónico">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-envelope"></span>
@@ -56,48 +57,22 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <div class="input-group mb-3">
-                                <input type="password" name="password" class="form-control" placeholder="Contraseña">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-lock"></span>
-                                    </div>
-                                </div>
-                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Solicitar nueva contraseña</button>
                         </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-12 col-sm-7">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Recordarme
-                                </label>
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-12 col-sm-5">
-                            <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
-                        </div>
-                        <!-- /.col -->
                     </div>
                 </form>
-                <div class="row mb-1">
+                <div class="row mt-3 mb-1">
                     <div class="col-12">
-                        <a class="btn btn-outline-primary btn-block" href="{{ route('password.request') }}">¿Olvidaste
-                            tu
-                            contraseña?</a>
+                        <a class="btn btn-outline-primary btn-block" href="{{ route('login') }}">Iniciar sesión</a>
                     </div>
                 </div>
                 <div class="row mb-0">
                     <div class="col-12">
-                        <a href="{{ route('register') }}" class="btn btn-outline-success btn-block"
+                        <a class="btn btn-outline-success btn-block" href="{{ route('register') }}"
                             class="text-center">Registrarme</a>
                     </div>
                 </div>
             </div>
-            <!-- /.login-card-body -->
         </div>
     </div>
     <!-- /.login-box -->

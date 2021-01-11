@@ -9,6 +9,8 @@ class Cliente extends Model
 {
     use HasFactory;
 
+    protected $table = 'clientes';
+
     public function users()
     {
         return $this->hasOne(User::class, 'cliente_id');

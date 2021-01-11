@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
-use PhpParser\Node\Expr\FuncCall;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,16 +16,11 @@ use PhpParser\Node\Expr\FuncCall;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('inicio');
 
-Route::get('admin', function(){
-    return view('admin');
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index']);
+    Route::get('/admin2', [App\Http\Controllers\AdminController::class, 'index']);
+    Route::get('/admin3', [App\Http\Controllers\AdminController::class, 'index']);
+    Route::get('/admin4', [App\Http\Controllers\AdminController::class, 'index']);
 });
-
-Route::get('clientes', function(){
-    return view('clientes');
-});
-
-/*Route::get('login', function(){
-    return view('auth.login');
-});*/
